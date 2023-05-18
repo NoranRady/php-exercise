@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('round_lot_size');
             $table->string('security_name');
             $table->string('symbol');
-            $table->boolean('test_issue')->default(false);
+            $table->string('test_issue');
             $table->timestamps();
         });
     }
