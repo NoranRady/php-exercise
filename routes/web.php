@@ -20,3 +20,5 @@ Route::get('/', function () {
 
 
 Route::get('/applications/create', [ApplicationController::class, 'create'])->name('applications.create');
+Route::get('/applications/historics/{symbol}', [ApplicationController::class, 'historics'])->name('applications.historics');
+

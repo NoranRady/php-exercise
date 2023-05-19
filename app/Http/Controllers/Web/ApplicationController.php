@@ -12,4 +12,11 @@ class ApplicationController extends Controller
     {
         return view('applications.create');
     }
+
+    public function historics($symbol)
+    {
+        return view('applications.historics', [
+            'symbol' => $symbol,
+        ]);
+    }
 }
