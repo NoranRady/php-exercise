@@ -8,6 +8,6 @@ class CompanyRepository
 {
     public function getCompanies()
     {
-        return Company::select('symbol')->get();
+        return Company::select('id','symbol')->get();
     }
 }
