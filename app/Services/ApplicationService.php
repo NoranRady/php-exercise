@@ -17,8 +17,6 @@ class ApplicationService
 
     public function storeApplication($companyId, $startDate, $endDate, $email): Application
     {
-        $startDateFormatted = Carbon::createFromFormat('d-m-Y', $startDate)->format('Y-m-d');
-        $endDateFormatted = Carbon::createFromFormat('d-m-Y', $endDate)->format('Y-m-d');
-        return $this->applicationRepository->storeApplication($companyId, $startDateFormatted, $endDateFormatted, $email);
+        return $this->applicationRepository->storeApplication($companyId, $startDate, $endDate, $email);
     }
 }
