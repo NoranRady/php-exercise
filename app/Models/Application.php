@@ -15,4 +15,9 @@ class Application extends Model
         'end_date',
         'email',
     ];
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }

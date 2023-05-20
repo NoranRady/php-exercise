@@ -16,4 +16,8 @@ class ApplicationRepository
         $application->save();
         return $application;
     }
+
+    public function getApplication($applicationId){
+        return Application::with('company')->where('id',$applicationId)->first();
+    }
 }

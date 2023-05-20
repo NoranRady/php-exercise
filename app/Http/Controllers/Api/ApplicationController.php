@@ -17,11 +17,11 @@ class ApplicationController extends Controller
 
     public function store(StoreApplicationRequest $request)
     {
-        $application = $this->applicationService->storeApplication($request->input('company_id'),
-                                                                    $request->input('start_date'),
-                                                                    $request->input('end_date'),
-                                                                    $request->input('email') 
-                                                                );
-        return response()->json(['application' => $application], 201);
+        $this->applicationService->storeApplication($request->input('company_id'),
+                                                    $request->input('start_date'),
+                                                    $request->input('end_date'),
+                                                    $request->input('email') 
+                                                );
+        return response()->json(['Application Created Successfuly'], 201);
     }
 }

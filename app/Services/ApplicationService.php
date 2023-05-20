@@ -4,7 +4,8 @@ namespace App\Services;
 
 use App\Models\Application;
 use App\Repositories\ApplicationRepository;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeEmail;
 
 class ApplicationService
 {
@@ -17,6 +18,10 @@ class ApplicationService
 
     public function storeApplication($companyId, $startDate, $endDate, $email): Application
     {
-        return $this->applicationRepository->storeApplication($companyId, $startDate, $endDate, $email);
+        $application =  $this->applicationRepository->storeApplication($companyId, $startDate, $endDate, $email);
+        $applicationData =  $this->applicationRepository->getApplication($application->id);
+        Mail::to($application->email)->send(new WelcomeEmail($applicationData));
+        return $application;
+
     }
 }
