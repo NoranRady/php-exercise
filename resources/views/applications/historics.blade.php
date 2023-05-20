@@ -3,6 +3,13 @@
 @section('content')
     <h1>Historical Stock Data</h1>
     <p style="color: blue;"><a href="#chart">Click here to view chart at the end of the page</a></p>
+
+    <div id="loading-spinner" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    
     <table class="table table-striped table-bordered">
         <thead class="thead-light">
             <tr>
@@ -44,6 +51,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const symbol = '{{ $symbol }}'; // assuming the $symbol variable is passed from the controller
+        const spinner = document.getElementById('loading-spinner');
+        spinner.style.display = 'block'; // Show the spinner
+    
         fetch(`https://yh-finance.p.rapidapi.com/stock/v3/get-historical-data?symbol=${symbol}`, {
                 headers: {
                     'X-RapidAPI-Key': '3635bd2bc9mshdb45b5dbbc89d81p158584jsn8b2f5b986b52',
@@ -54,12 +64,12 @@
             .then(data => {
                 const historicalData = data.prices;
                 console.log(historicalData);
-
+    
                 // Create arrays of dates, opens, and closes
                 const dates = historicalData.map(data => data.date);
                 const opens = historicalData.map(data => data.open);
-                const closes = historicalData.map(data => data.close);
-
+                const closes =historicalData.map(data => data.close);
+    
                 // Create chart data
                 const chartData = {
                     labels: dates,
@@ -77,7 +87,7 @@
                         },
                     ]
                 };
-
+    
                 // Create chart options
                 const chartOptions = {
                     responsive: true,
@@ -104,7 +114,7 @@
                         },
                     },
                 };
-
+    
                 // Get tabledata and render it to the page
                 const tableBody = document.querySelector('tbody');
                 tableBody.innerHTML = '';
@@ -116,24 +126,24 @@
                     const lowCell = document.createElement('td');
                     const closeCell = document.createElement('td');
                     const volumeCell = document.createElement('td');
-
+    
                     dateCell.innerText = data.date;
                     openCell.innerText = data.open;
                     highCell.innerText = data.high;
                     lowCell.innerText = data.low;
                     closeCell.innerText = data.close;
                     volumeCell.innerText = data.volume;
-
+    
                     row.appendChild(dateCell);
                     row.appendChild(openCell);
                     row.appendChild(highCell);
                     row.appendChild(lowCell);
                     row.appendChild(closeCell);
                     row.appendChild(volumeCell);
-
+    
                     tableBody.appendChild(row);
                 });
-
+    
                 // Create chart
                 const ctx = document.getElementById('chart').getContext('2d');
                 const chart = new Chart(ctx, {
@@ -141,7 +151,10 @@
                     data: chartData,
                     options: chartOptions,
                 });
+    
+                spinner.style.display = 'none'; // Hide the spinner after the data is fetched
             })
             .catch(error => console.error(error));
     </script>
+    
 @endsection
