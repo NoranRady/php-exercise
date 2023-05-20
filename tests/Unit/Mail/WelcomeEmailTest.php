@@ -4,8 +4,8 @@ namespace Tests\Unit\Mail;
 use Tests\TestCase;
 use App\Mail\WelcomeEmail;
 use Illuminate\Mail\PendingMail;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Mail\Mailables\Content;
 
 class WelcomeEmailTest extends TestCase
 {
@@ -61,6 +61,24 @@ class WelcomeEmailTest extends TestCase
 
         $email = new WelcomeEmail($application);
         $content = $email->content();
+        $this->assertEquals('emails.creation', $content->view);
+    }
+    
+    public function testMessageBuildIsCorrectlyDefined()
+    {
+        $application = [
+            'company' => [
+                'company_name' => 'Acme Inc.',
+            ],
+            'email' => 'jane.doe@example.com',
+            'start_date' => '2023-06-01',
+            'end_date' => '2023-06-30',
+        ];
+
+        $email = new WelcomeEmail($application);
+        $content = $email->build();
+
+        $this->assertInstanceOf(Content::class, $content);
         $this->assertEquals('emails.creation', $content->view);
     }
 

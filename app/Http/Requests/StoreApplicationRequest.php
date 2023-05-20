@@ -32,7 +32,7 @@ class StoreApplicationRequest extends FormRequest
     }
 
 
-    protected function failedValidation(Validator $validator)
+    public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
             'error' => 'Invalid Input',

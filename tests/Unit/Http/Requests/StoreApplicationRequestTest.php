@@ -4,7 +4,9 @@ namespace Tests\Unit\Http\Requests;
 
 use Tests\TestCase;
 use App\Http\Requests\StoreApplicationRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
+use Illuminate\Support\Facades\Validator as ValidatorFacade;
 
 class StoreApplicationRequestTest extends TestCase
 {
@@ -77,5 +79,25 @@ class StoreApplicationRequestTest extends TestCase
                 'The email must be a valid email address.'
             ]
         ], $validator->errors()->toArray());
+    }
+
+    public function test_failed_validation_returns_http_response_exception()
+    {
+        $validator = ValidatorFacade::make([], []);
+        $request = new StoreApplicationRequest();
+        $exception = null;
+
+        try {
+            $request->failedValidation($validator);
+        } catch (HttpResponseException $e) {
+            $exception = $e;
+        }
+
+        $this->assertInstanceOf(HttpResponseException::class, $exception);
+        $this->assertEquals(422, $exception->getResponse()->getStatusCode());
+        $this->assertEquals(json_encode([
+            'error' => 'Invalid Input',
+            'messages' => $validator->errors(),
+        ]), $exception->getResponse()->getContent());
     }
 }
