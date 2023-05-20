@@ -6,7 +6,6 @@
 /.idea
 /.vscode
 /.vagrant
-.env
 .env.testing
 .phpunit.result.cache
 /public/tmp
