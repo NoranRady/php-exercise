@@ -28,8 +28,8 @@ class WelcomeEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: $this->application->company->company_name,
-            to: $this->application->email
+            subject: $this->application['company']['company_name'],
+            to: $this->application['email']
         );
     }
 
@@ -41,8 +41,8 @@ class WelcomeEmail extends Mailable
         return new Content(
             'emails.creation',null,null,null,
             [
-                'startDate' => $this->application->start_date,
-                'endDate' => $this->application->end_date,
+                'startDate' => $this->application['start_date'],
+                'endDate' => $this->application['end_date'],
             ]
         );
     }

@@ -22,6 +22,5 @@ class ApplicationService
         $applicationData =  $this->applicationRepository->getApplication($application->id);
         Mail::to($application->email)->send(new WelcomeEmail($applicationData));
         return $application;
-
     }
 }

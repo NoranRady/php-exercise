@@ -18,6 +18,6 @@ class ApplicationRepository
     }
 
     public function getApplication($applicationId){
-        return Application::with('company')->where('id',$applicationId)->first();
+        return Application::with('company')->where('id',$applicationId)->first()->toArray();
     }
 }
