@@ -28,7 +28,7 @@ class WelcomeEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'The submitted company: ' . $this->application->company->name,
+            subject: $this->application->company->company_name,
             to: $this->application->email
         );
     }

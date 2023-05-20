@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>Welcome to My App</title>
-</head>
-
 <body>
-    <h1>Welcome!</h1>
-    <p>From {{$startDate}} to {{$endDate}}</p>
+    <h1>From {{ $startDate }} to {{ $endDate }}</h1>
     <p>Thank you for joining My App!</p>
 </body>
 
