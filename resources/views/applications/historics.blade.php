@@ -2,8 +2,9 @@
 
 @section('content')
     <h1>Historical Stock Data</h1>
-    <table class="table">
-        <thead>
+    <p style="color: blue;"><a href="#chart">Click here to view chart at the end of the page</a></p>
+    <table class="table table-striped table-bordered">
+        <thead class="thead-light">
             <tr>
                 <th>Date</th>
                 <th>Open</th>
@@ -15,10 +16,30 @@
         </thead>
         <tbody>
         </tbody>
-
     </table>
 
-    <canvas id="chart"></canvas>
+    <canvas id="chart" style="max-height: 400px;"></canvas>
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+    
+        h1 {
+            margin-top: 50px;
+            margin-bottom: 30px;
+            font-size: 36px;
+            text-align: center;
+        }
+    
+        table {
+            margin-bottom: 50px;
+        }
+    
+        canvas {
+            margin-top: 50px;
+        }
+    </style>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>

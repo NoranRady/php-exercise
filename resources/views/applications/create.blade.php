@@ -6,6 +6,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             let selectedSymbol = '';
             const assignedToSelect = document.getElementById('company_symbol');
+            assignedToSelect.selectedIndex = -1;
             assignedToSelect.addEventListener('change', function() {
                 selectedSymbol = assignedToSelect.options[assignedToSelect.selectedIndex].text;
             });
@@ -132,6 +133,7 @@
             <div class="form-group">
                 <label for="company_symbol">Company Symbol</label>
                 <select class="form-control" id="company_symbol" name="company_symbol" required>
+                    <option value="">Select a company</option>
                 </select>
             </div>
 
