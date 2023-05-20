@@ -44,9 +44,9 @@ class StoreApplicationRequest extends FormRequest
     {
 
         return [
-            'company_id.required' => 'The company symbol field is required.',
-            'company_id.exists' => 'The selected company symbol is invalid.',
-            'start_date.required' => 'The start date field is required.',
+            'company_id.required' => 'The company id field is required.',
+            'company_id.exists' => 'The selected company id is invalid.',
+            'start_date.required' => 'The start date field is required.', 
             'start_date.date' => 'The start date must be a valid date.',
             'start_date.before_or_equal' => 'The start date must be before or equal to the end date & today.',
             'end_date.required' => 'The end date field is required.',
